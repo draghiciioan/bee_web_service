@@ -1,6 +1,4 @@
 const AnimatedBackground = () => {
-  // z-0 keeps the background below any container with z-10 or higher,
-  // ensuring main content remains visible above the animation.
   return (
     <div
       className="fixed inset-0 z-0 animate-gradient opacity-70"

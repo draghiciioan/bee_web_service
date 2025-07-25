@@ -6,7 +6,7 @@ function App() {
     return (
         <>
             <AnimatedBackground/>
-            <div className="relative z-10 ...">
+            <div className="relative ...">
                 {/* restul aplicației */}
             </div>
         </>
