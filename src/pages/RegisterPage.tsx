@@ -16,7 +16,7 @@ const RegisterPage: React.FC = () => {
     try {
       await register({ email, password, name });
       setSuccess(true);
-    } catch (err: any) {
+    } catch {
       setError('Înregistrare eșuată!');
     }
   };
@@ -65,4 +65,4 @@ const RegisterPage: React.FC = () => {
   );
 };
 
-export default RegisterPage; 
+export default RegisterPage;

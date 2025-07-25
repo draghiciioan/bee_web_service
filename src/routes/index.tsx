@@ -21,4 +21,4 @@ const AppRoutes: React.FC = () => (
   </BrowserRouter>
 );
 
-export default AppRoutes; 
+export default AppRoutes;

@@ -19,8 +19,9 @@ export function useCustomers() {
       const res = await customersApi.get('/customers');
       setCustomers(res.data);
       setError(null);
-    } catch (e: any) {
-      setError(e.message);
+    } catch (e: unknown) {
+      if (e instanceof Error) setError(e.message);
+      else setError('Eroare la preluarea clienților');
     }
     setLoading(false);
   };
@@ -45,4 +46,4 @@ export function useCustomers() {
   }, []);
 
   return { customers, loading, error, addCustomer, updateCustomer, deleteCustomer, fetchCustomers };
-} 
+}

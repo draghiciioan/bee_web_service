@@ -8,4 +8,4 @@ export const authApi = axios.create({
 export const customersApi = axios.create({
   baseURL: import.meta.env.VITE_CUSTOMERS_API_URL || 'http://localhost:8002',
   withCredentials: true,
-}); 
+});
