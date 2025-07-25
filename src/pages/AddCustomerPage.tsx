@@ -16,8 +16,10 @@ const AddCustomerPage: React.FC = () => {
     try {
       await addCustomer({ name, email, phone });
       setSuccess(true);
-      setName(''); setEmail(''); setPhone('');
-    } catch (err: any) {
+      setName('');
+      setEmail('');
+      setPhone('');
+    } catch {
       setError('Eroare la adăugare!');
     }
   };
