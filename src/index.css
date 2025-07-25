@@ -1,12 +1,94 @@
 @import "./themes/bee.css";   /* trebuie să fie PRIMUL */
 @import "tailwindcss";
 
+/* Base gradient animation */
 @keyframes gradientMove {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
+/* Glow pulse animation */
+@keyframes glowPulse {
+  0% { opacity: 0.5; filter: blur(20px); }
+  50% { opacity: 0.8; filter: blur(15px); }
+  100% { opacity: 0.5; filter: blur(20px); }
+}
+
+/* Grid line animation */
+@keyframes gridMove {
+  0% { background-position: 0px 0px; }
+  100% { background-position: 50px 50px; }
+}
+
+/* Bee flight path animation */
+@keyframes beeFlight {
+  0% { background-position: 0px 0px; }
+  100% { background-position: 100px 100px; }
+}
+
+/* Scan line animation */
+@keyframes scanLine {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+/* Flicker animation */
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  10% { opacity: 0.9; }
+  20% { opacity: 1; }
+  30% { opacity: 0.9; }
+  40% { opacity: 1; }
+  50% { opacity: 0.9; }
+  60% { opacity: 1; }
+  70% { opacity: 0.9; }
+  80% { opacity: 1; }
+  90% { opacity: 0.9; }
+}
+
 .animate-gradient {
   animation: gradientMove 15s ease infinite;
+}
+
+.animate-glow {
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+.animate-grid {
+  animation: gridMove 3s linear infinite;
+}
+
+.animate-bee-flight {
+  animation: beeFlight 10s linear infinite;
+}
+
+.animate-scan-line {
+  animation: scanLine 8s linear infinite;
+}
+
+.animate-flicker {
+  animation: flicker 5s linear infinite;
+}
+
+/* Floating animation */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Border shimmer animation */
+@keyframes borderShimmer {
+  0% { border-color: rgba(255, 213, 0, 0.2); }
+  50% { border-color: rgba(255, 213, 0, 0.5); }
+  100% { border-color: rgba(255, 213, 0, 0.2); }
+}
+
+.animate-border-shimmer {
+  animation: borderShimmer 4s ease-in-out infinite;
 }
