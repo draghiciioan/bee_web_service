@@ -1,0 +1,159 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: beeFuturistLight --default, beeFuturistDark --prefersdark, beeCyberpunk, beeEmerald, beeNeoTokyo, beePlasma, beeChromeGrid;
+}
+
+/* === beeFuturistLight === */
+@plugin "daisyui/theme" {
+  name: "beeFuturistLight";
+  color-scheme: light;
+  --color-primary: #FFD500;
+  --color-primary-content: #000;
+  --color-secondary: #FF00FF;
+  --color-secondary-content: #000;
+  --color-accent: #00AEEF;
+  --color-accent-content: #FFF;
+  --color-neutral: #E5E5E5;
+  --color-neutral-content: #000;
+  --color-base-100: #FFF;
+  --color-base-200: #F3F3F3;
+  --color-base-300: #E5E5E5;
+  --color-base-content: #000;
+  --color-info: #00B8D9;
+  --color-success: #36D399;
+  --color-warning: #FBBD23;
+  --color-error: #F87272;
+}
+
+/* === beeFuturistDark === */
+@plugin "daisyui/theme" {
+  name: "beeFuturistDark";
+  color-scheme: dark;
+  --color-primary: #FFD500;
+  --color-primary-content: #000;
+  --color-secondary: #FF00FF;
+  --color-secondary-content: #FFF;
+  --color-accent: #00FFFF;
+  --color-accent-content: #000;
+  --color-neutral: #1A1A1A;
+  --color-neutral-content: #FFF;
+  --color-base-100: #0D0D0D;
+  --color-base-200: #1A1A1A;
+  --color-base-300: #2A2A2A;
+  --color-base-content: #FFF;
+  --color-info: #00FFFF;
+  --color-success: #00FF88;
+  --color-warning: #FFB300;
+  --color-error: #FF0044;
+}
+
+/* === beeCyberpunk === */
+@plugin "daisyui/theme" {
+  name: "beeCyberpunk";
+  color-scheme: dark;
+  --color-primary: #FF0090;
+  --color-primary-content: #000;
+  --color-secondary: #00FFF7;
+  --color-secondary-content: #000;
+  --color-accent: #FFEF00;
+  --color-accent-content: #000;
+  --color-neutral: #1A001F;
+  --color-neutral-content: #FFF;
+  --color-base-100: #0C0014;
+  --color-base-200: #1B0033;
+  --color-base-300: #320055;
+  --color-base-content: #FFF;
+  --color-info: #00D3FF;
+  --color-success: #38FF9C;
+  --color-warning: #FFEF00;
+  --color-error: #FF0040;
+}
+
+/* === beeEmerald === */
+@plugin "daisyui/theme" {
+  name: "beeEmerald";
+  color-scheme: light;
+  --color-primary: #34D399;
+  --color-primary-content: #000;
+  --color-secondary: #10B981;
+  --color-secondary-content: #FFF;
+  --color-accent: #6EE7B7;
+  --color-accent-content: #000;
+  --color-neutral: #E0F2F1;
+  --color-neutral-content: #000;
+  --color-base-100: #ECFDF5;
+  --color-base-200: #D1FAE5;
+  --color-base-300: #A7F3D0;
+  --color-base-content: #000;
+  --color-info: #2563EB;
+  --color-success: #059669;
+  --color-warning: #F59E0B;
+  --color-error: #DC2626;
+}
+
+/* === beeNeoTokyo === */
+@plugin "daisyui/theme" {
+  name: "beeNeoTokyo";
+  color-scheme: dark;
+  --color-primary: #9F00FF;
+  --color-primary-content: #FFFFFF;
+  --color-secondary: #00A3FF;
+  --color-secondary-content: #000000;
+  --color-accent: #E300FF;
+  --color-accent-content: #FFFFFF;
+  --color-neutral: #1C1C2E;
+  --color-neutral-content: #FFFFFF;
+  --color-base-100: #0B0B13;
+  --color-base-200: #14142B;
+  --color-base-300: #1E1E40;
+  --color-base-content: #F0F0F0;
+  --color-info: #00C4FF;
+  --color-success: #00FFAA;
+  --color-warning: #FFC300;
+  --color-error: #FF0055;
+}
+
+/* === beePlasma === */
+@plugin "daisyui/theme" {
+  name: "beePlasma";
+  color-scheme: dark;
+  --color-primary: #00F0FF;
+  --color-primary-content: #000000;
+  --color-secondary: #FF00C8;
+  --color-secondary-content: #000000;
+  --color-accent: #FFFFFF;
+  --color-accent-content: #000000;
+  --color-neutral: #101010;
+  --color-neutral-content: #FFFFFF;
+  --color-base-100: #0B0B0B;
+  --color-base-200: #121212;
+  --color-base-300: #1C1C1C;
+  --color-base-content: #FAFAFA;
+  --color-info: #00C8FF;
+  --color-success: #28FFBF;
+  --color-warning: #FFE600;
+  --color-error: #FF006E;
+}
+
+/* === beeChromeGrid === */
+@plugin "daisyui/theme" {
+  name: "beeChromeGrid";
+  color-scheme: light;
+  --color-primary: #C0C0C0;
+  --color-primary-content: #000000;
+  --color-secondary: #FFD500;
+  --color-secondary-content: #000000;
+  --color-accent: #AAAAAA;
+  --color-accent-content: #000000;
+  --color-neutral: #E0E0E0;
+  --color-neutral-content: #111111;
+  --color-base-100: #F5F5F5;
+  --color-base-200: #EAEAEA;
+  --color-base-300: #DDDDDD;
+  --color-base-content: #111111;
+  --color-info: #3B82F6;
+  --color-success: #22C55E;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
+}
+
