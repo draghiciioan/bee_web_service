@@ -1,69 +1,110 @@
-# React + TypeScript + Vite
+# BeeConect - Serviciu Web
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Descriere Generală
 
-Currently, two official plugins are available:
+Serviciul Web BeeConect este interfața frontend a platformei BeeConect, oferind o experiență de utilizare modernă și intuitivă pentru clienți și administratori de afaceri. Acest serviciu este construit folosind React, TypeScript și Vite, și se integrează cu microserviciile backend prin API-uri REST.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tehnologii Utilizate
 
-## Expanding the ESLint configuration
+- **React 19**: Bibliotecă JavaScript pentru construirea interfețelor utilizator
+- **TypeScript**: Superset JavaScript cu tipare statică
+- **Vite**: Instrument de build rapid pentru dezvoltare modernă web
+- **TailwindCSS**: Framework CSS pentru design rapid și responsiv
+- **DaisyUI**: Componente UI bazate pe TailwindCSS
+- **Axios**: Client HTTP pentru efectuarea cererilor API
+- **React Router**: Bibliotecă pentru rutare în aplicații React
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Structura Proiectului
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **src/api.ts**: Configurare Axios pentru comunicarea cu serviciile backend
+- **src/components/**: Componente React reutilizabile
+- **src/context/**: Contexte React pentru gestionarea stării globale
+- **src/hooks/**: Hook-uri personalizate React
+- **src/pages/**: Componente de pagină pentru diferite rute
+- **src/routes/**: Configurare rutare pentru aplicație
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## Configurare și Rulare
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Cerințe Preliminare
+
+- Node.js 18+ 
+- npm sau yarn
+
+### Instalare Dependențe
+
+```bash
+npm install
+# sau
+yarn install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Variabile de Mediu
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Creați un fișier `.env` în directorul rădăcină cu următoarele variabile:
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+VITE_AUTH_API_URL=http://localhost:8001
+VITE_CUSTOMERS_API_URL=http://localhost:8016
+```
+
+### Rulare în Modul Dezvoltare
+
+```bash
+npm run dev
+# sau
+yarn dev
+```
+
+Aplicația va fi disponibilă la adresa http://localhost:3000.
+
+### Construire pentru Producție
+
+```bash
+npm run build
+# sau
+yarn build
+```
+
+Fișierele optimizate pentru producție vor fi generate în directorul `dist`.
+
+## Integrare cu Microservicii
+
+Serviciul web se integrează cu următoarele microservicii:
+
+- **Serviciul de Autentificare**: Gestionează autentificarea utilizatorilor, înregistrarea și gestionarea sesiunilor
+- **Serviciul de Clienți**: Gestionează datele clienților, etichetele și notițele
+
+## Funcționalități Principale
+
+- **Autentificare**: Login, înregistrare, recuperare parolă
+- **Gestionare Clienți**: Vizualizare, adăugare, editare și ștergere clienți
+- **Profil Utilizator**: Gestionarea informațiilor personale și preferințelor
+
+## Depanare
+
+### Probleme Comune
+
+1. **Erori de Compilare TypeScript**:
+   - Verificați că toate dependențele sunt instalate corect
+   - Asigurați-vă că sintaxa de import respectă configurația `verbatimModuleSyntax` din tsconfig
+
+2. **Erori de Conectare la API**:
+   - Verificați că serviciile backend rulează
+   - Asigurați-vă că variabilele de mediu sunt configurate corect
+
+3. **Probleme de Autentificare**:
+   - Verificați că token-urile JWT sunt gestionate corect
+   - Asigurați-vă că cererile includ anteturile de autorizare corecte
+
+## Contribuție
+
+Pentru a contribui la acest proiect:
+
+1. Creați un branch nou pentru funcționalitatea dorită
+2. Implementați modificările respectând standardele de cod
+3. Testați modificările local
+4. Creați un pull request către branch-ul principal
+
+## Licență
+
+Acest proiect este proprietar și confidențial. Toate drepturile rezervate.

@@ -1,8 +1,8 @@
-# BeeConect Web Service Fix
+# Remediere Serviciu Web BeeConect
 
-## Issue Fixed
+## Problema Rezolvată
 
-The web-service component was failing to build with the following TypeScript errors:
+Componenta web-service nu reușea să se construiască, afișând următoarele erori TypeScript:
 
 ```
 src/api.ts(1,19): error TS2307: Cannot find module 'axios' or its corresponding type declarations.
@@ -12,44 +12,44 @@ src/pages/CustomerDetailsPage.tsx(2,27): error TS2307: Cannot find module 'react
 src/routes/index.tsx(2,56): error TS2307: Cannot find module 'react-router-dom' or its corresponding type declarations.
 ```
 
-## Changes Made
+## Modificări Efectuate
 
-1. Added missing dependencies to `package.json`:
+1. Au fost adăugate dependențele lipsă în `package.json`:
    ```
    axios: ^1.6.7
    react-router-dom: ^6.22.3
    ```
 
-2. Fixed the import syntax in `src/context/AuthContext.tsx`:
+2. A fost corectată sintaxa de import în `src/context/AuthContext.tsx`:
    ```typescript
-   // Before
+   // Înainte
    import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
    
-   // After
+   // După
    import { createContext, useContext, useState, useEffect } from 'react';
    import type { ReactNode } from 'react';
    ```
 
-## Root Cause
+## Cauza Principală
 
-1. The project was missing required dependencies:
-   - `axios` - Used for API requests in `src/api.ts`
-   - `react-router-dom` - Used for routing in multiple files
+1. Proiectului îi lipseau dependențele necesare:
+   - `axios` - Utilizat pentru cereri API în `src/api.ts`
+   - `react-router-dom` - Utilizat pentru rutare în mai multe fișiere
 
-2. TypeScript configuration in `tsconfig.app.json` has `verbatimModuleSyntax: true`, which requires types to be imported using the `import type` syntax.
+2. Configurația TypeScript din `tsconfig.app.json` are `verbatimModuleSyntax: true`, care necesită ca tipurile să fie importate folosind sintaxa `import type`.
 
-## How to Test
+## Cum să Testați
 
-1. Rebuild the web-service container:
+1. Reconstruiți containerul pentru serviciul web:
    ```
    cd C:\Users\jhony\Desktop\BeeConect\beeconect-dev
    make web-service
    ```
 
-2. Check that the build completes successfully without TypeScript errors.
+2. Verificați că procesul de build se finalizează cu succes, fără erori TypeScript.
 
-3. Access the web service at http://localhost:3001 to verify it's working correctly.
+3. Accesați serviciul web la http://localhost:3001 pentru a verifica că funcționează corect.
 
-## Additional Notes
+## Note Suplimentare
 
-The ESLint warning about `react-refresh/only-export-components` in `src/context/AuthContext.tsx` is not related to the build errors and won't prevent the application from building or running. It's a linting rule suggesting that files with React's Fast Refresh should only export components, not functions like `useAuth`.
+Avertismentul ESLint despre `react-refresh/only-export-components` din `src/context/AuthContext.tsx` nu este legat de erorile de build și nu va împiedica aplicația să se construiască sau să ruleze. Este o regulă de linting care sugerează că fișierele cu React Fast Refresh ar trebui să exporte doar componente, nu funcții precum `useAuth`.
