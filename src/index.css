@@ -1,4 +1,4 @@
-@import "app/themes/bee.css";   /* trebuie să fie PRIMUL */
+@import "./app/themes/bee.css";   /* trebuie să fie PRIMUL */
 @import "tailwindcss";
 
 /* Base gradient animation */
