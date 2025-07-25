@@ -1,4 +1,5 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
+import { useAuth } from "../context/AuthContext";
 
 interface LoginModalProps {
   onClose: () => void;
@@ -6,6 +7,10 @@ interface LoginModalProps {
 
 const LoginModal: React.FC<LoginModalProps> = ({ onClose }) => {
   const modalRef = useRef<HTMLDivElement>(null);
+  const { login, loading } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -14,6 +19,17 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose }) => {
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
   }, [onClose]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    try {
+      await login(email, password);
+      onClose();
+    } catch (err: any) {
+      setError("Email sau parolă incorecte!");
+    }
+  };
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm animate-fade-in" id="login-modal">
@@ -29,24 +45,30 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose }) => {
           ×
         </button>
         <h2 className="text-2xl font-bold text-primary mb-2 text-center">Autentificare</h2>
-        <form className="flex flex-col gap-4">
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <input
             type="email"
             placeholder="Email"
             className="input input-bordered input-primary w-full bg-base-200/80"
             required
+            value={email}
+            onChange={e => setEmail(e.target.value)}
           />
           <input
             type="password"
             placeholder="Parolă"
             className="input input-bordered input-primary w-full bg-base-200/80"
             required
+            value={password}
+            onChange={e => setPassword(e.target.value)}
           />
+          {error && <div className="text-error text-sm text-center">{error}</div>}
           <button
             type="submit"
             className="btn btn-primary w-full font-semibold shadow-lg hover:scale-105 transition-all"
+            disabled={loading}
           >
-            Intră în cont
+            {loading ? "Se autentifică..." : "Intră în cont"}
           </button>
         </form>
         <div className="text-center text-sm text-base-content/70">
