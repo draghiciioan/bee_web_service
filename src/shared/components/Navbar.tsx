@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { UserCircle, LogOut, Settings, UserPlus, Lock } from "lucide-react";
-import LoginModal from "../../components/LoginModal";
 import beeLogo from "../../assets/logo-bee.webp"; // Poți schimba cu logo-ul tău
 
 const themeOptions = [
@@ -193,8 +192,6 @@ const Navbar = () => {
           )}
         </div>
       </div>
-      {/* Login Modal */}
-      {loginOpen && <LoginModal onClose={() => setLoginOpen(false)} />}
     </nav>
   );
 };
