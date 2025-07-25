@@ -45,4 +45,4 @@ export function useCustomers() {
   }, []);
 
   return { customers, loading, error, addCustomer, updateCustomer, deleteCustomer, fetchCustomers };
-} 
+}

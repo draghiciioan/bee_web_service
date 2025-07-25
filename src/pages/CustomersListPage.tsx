@@ -37,4 +37,4 @@ const CustomersListPage: React.FC = () => {
   );
 };
 
-export default CustomersListPage; 
+export default CustomersListPage;
