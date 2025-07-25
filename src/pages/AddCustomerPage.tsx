@@ -66,4 +66,4 @@ const AddCustomerPage: React.FC = () => {
   );
 };
 
-export default AddCustomerPage; 
+export default AddCustomerPage;

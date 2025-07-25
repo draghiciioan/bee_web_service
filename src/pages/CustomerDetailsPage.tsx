@@ -22,4 +22,4 @@ const CustomerDetailsPage: React.FC = () => {
   );
 };
 
-export default CustomerDetailsPage; 
+export default CustomerDetailsPage;
