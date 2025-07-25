@@ -26,7 +26,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose }) => {
     try {
       await login(email, password);
       onClose();
-    } catch (err: any) {
+    } catch {
       setError("Email sau parolă incorecte!");
     }
   };
