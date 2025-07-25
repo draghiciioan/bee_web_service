@@ -1,7 +1,9 @@
 const AnimatedBackground = () => {
+  // z-0 keeps the background below any container with z-10 or higher,
+  // ensuring main content remains visible above the animation.
   return (
     <div
-      className="fixed inset-0 -z-10 animate-gradient opacity-70"
+      className="fixed inset-0 z-0 animate-gradient opacity-70"
       style={{
         backgroundImage: "linear-gradient(270deg, #0f0c29, #302b63, #24243e)",
         backgroundSize: "300% 300%",
