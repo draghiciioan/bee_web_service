@@ -1,55 +1,54 @@
-# Remediere Serviciu Web BeeConect
+# Fix for 404 Errors with React Router in Nginx
 
-## Problema Rezolvată
+## Issue Description
 
-Componenta web-service nu reușea să se construiască, afișând următoarele erori TypeScript:
+The application was experiencing 404 errors when navigating to client-side routes like `/add-customer`. This was happening because Nginx was trying to find physical files at these paths instead of serving the index.html file and letting React Router handle the routing.
 
+Error from logs:
 ```
-src/api.ts(1,19): error TS2307: Cannot find module 'axios' or its corresponding type declarations.
-src/context/AuthContext.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
-src/context/AuthContext.tsx(1,65): error TS1484: 'ReactNode' is a type and must be imported using a type-only import when 'verbatimModuleSyntax' is enabled.
-src/pages/CustomerDetailsPage.tsx(2,27): error TS2307: Cannot find module 'react-router-dom' or its corresponding type declarations.
-src/routes/index.tsx(2,56): error TS2307: Cannot find module 'react-router-dom' or its corresponding type declarations.
+2025-07-25T15:17:52.585852296Z 2025/07/25 15:17:52 [error] 30#30: *1 open() "/usr/share/nginx/html/add-customer" failed (2: No such file or directory), client: 172.19.0.1, server: localhost, request: "GET /add-customer HTTP/1.1", host: "localhost:3001", referrer: "http://localhost:3001/customers"
 ```
 
-## Modificări Efectuate
+## Solution
 
-1. Au fost adăugate dependențele lipsă în `package.json`:
-   ```
-   axios: ^1.6.7
-   react-router-dom: ^6.22.3
-   ```
+The solution was to create a custom Nginx configuration file (`nginx.conf`) and modify the Dockerfile to use this configuration. The key changes were:
 
-2. A fost corectată sintaxa de import în `src/context/AuthContext.tsx`:
-   ```typescript
-   // Înainte
-   import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-   
-   // După
-   import { createContext, useContext, useState, useEffect } from 'react';
-   import type { ReactNode } from 'react';
-   ```
+1. Created a custom `nginx.conf` file with the following configuration:
+   - Configured Nginx to serve static assets directly
+   - Added a `try_files` directive to serve index.html for routes that don't match physical files
+   - Set up error pages to redirect to index.html
 
-## Cauza Principală
+2. Modified the Dockerfile to use the custom configuration:
+   - Uncommented and updated the line that copies the nginx.conf file to the container
 
-1. Proiectului îi lipseau dependențele necesare:
-   - `axios` - Utilizat pentru cereri API în `src/api.ts`
-   - `react-router-dom` - Utilizat pentru rutare în mai multe fișiere
+## How It Works
 
-2. Configurația TypeScript din `tsconfig.app.json` are `verbatimModuleSyntax: true`, care necesită ca tipurile să fie importate folosind sintaxa `import type`.
+The key part of the solution is the `try_files` directive in the Nginx configuration:
 
-## Cum să Testați
+```nginx
+location / {
+    try_files $uri $uri/ /index.html;
+}
+```
 
-1. Reconstruiți containerul pentru serviciul web:
-   ```
-   cd C:\Users\jhony\Desktop\BeeConect\beeconect-dev
-   make web-service
-   ```
+This tells Nginx to:
+1. First try to serve the requested URI as a file
+2. If that fails, try to serve it as a directory
+3. If that also fails, serve index.html instead
 
-2. Verificați că procesul de build se finalizează cu succes, fără erori TypeScript.
+This allows the React Router to handle client-side routing, even when users directly access routes like `/add-customer` or refresh the page while on these routes.
 
-3. Accesați serviciul web la http://localhost:3001 pentru a verifica că funcționează corect.
+## Testing
 
-## Note Suplimentare
+To test this solution:
+1. Rebuild the Docker image: `docker build -t bee-web-service .`
+2. Run the container: `docker run -p 3001:80 bee-web-service`
+3. Navigate to http://localhost:3001/customers
+4. Click on links to navigate to other routes, such as `/add-customer`
+5. Verify that no 404 errors occur and the application routes correctly
 
-Avertismentul ESLint despre `react-refresh/only-export-components` din `src/context/AuthContext.tsx` nu este legat de erorile de build și nu va împiedica aplicația să se construiască sau să ruleze. Este o regulă de linting care sugerează că fișierele cu React Fast Refresh ar trebui să exporte doar componente, nu funcții precum `useAuth`.
+## Additional Notes
+
+- This is a common issue with single-page applications (SPAs) deployed on Nginx
+- The solution ensures that all routes defined in React Router will work correctly
+- Static assets in the `/assets/` directory are still served directly from the file system with appropriate caching headers
