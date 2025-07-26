@@ -85,6 +85,34 @@ Serviciul web se integrează cu următoarele microservicii:
 - **Serviciul de Autentificare**: Gestionează autentificarea utilizatorilor, înregistrarea și gestionarea sesiunilor
 - **Serviciul de Clienți**: Gestionează datele clienților, etichetele și notițele
 
+### Servicii de Autentificare
+
+Acestea sunt funcțiile expuse de fișierul `src/services/auth.ts` și folosesc variabila `VITE_AUTH_API_URL` pentru baza API:
+
+- `registerUser` – trimite datele de înregistrare la `/v1/auth/register`;
+- `loginUser` – autentifică utilizatorul la `/v1/auth/login` și returnează token-urile JWT;
+- `logout` – invalidează tokenul de refresh la `/v1/auth/logout`;
+- `refreshToken` – obține un nou set de token-uri de la `/v1/auth/refresh`;
+- `requestPasswordReset` – solicită resetarea parolei via `/v1/auth/password/reset`;
+- `resetPassword` – confirmă resetarea parolei la `/v1/auth/password/reset/confirm`;
+- `verifyEmail` – confirmă adresa de email prin `/v1/auth/verify-email`;
+- `verify2FA` – validează codul 2FA la `/v1/auth/2fa/verify`;
+- `setup2FA` – inițializează configurarea 2FA prin `/v1/auth/2fa/setup`;
+- `socialLogin` – generează URL-ul de autentificare socială `/v1/auth/{provider}`;
+- `socialCallback` – finalizează autentificarea socială la `/v1/auth/{provider}/callback`;
+- `currentUser` – returnează utilizatorul curent de la `/v1/auth/me`;
+- `validateToken` – verifică un token extern la `/v1/auth/validate-token`.
+
+
+Pentru comunicația cu serviciul de clienți se utilizează variabila `VITE_CUSTOMERS_API_URL`.
+
+### Gestionarea tokenurilor în AuthContext
+
+Componenta `AuthProvider` salvează tokenurile în `localStorage` și expune funcții
+de login, logout și refresh. La montare, `AuthContext` configurează `apiClient`
+prin `setAccessTokenGetter` și `setRefreshTokenHandler`, astfel încât interceptorii
+să poată atașa tokenul curent și să reîncerce cererile după o eroare 401.
+
 ## Funcționalități Principale
 
 - **Autentificare**: Login, înregistrare, recuperare parolă
@@ -114,7 +142,7 @@ Pentru a contribui la acest proiect:
 1. Creați un branch nou pentru funcționalitatea dorită
 2. Implementați modificările respectând standardele de cod
 3. Rulați `npm install` pentru a activa scripturile Husky
-4. Orice commit va porni automat `npm run lint` și `npm test` prin hook-ul *pre-commit*
+4. Orice commit va porni automat `npm run lint` și `npm test` prin scriptul `.husky/pre-commit`
 5. Testați modificările local
 6. Creați un pull request către branch-ul principal
 
