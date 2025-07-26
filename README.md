@@ -40,7 +40,7 @@ yarn install
 
 ### Variabile de Mediu
 
-Creați un fișier `.env` în directorul rădăcină cu următoarele variabile:
+Copiați fișierul `.env.example` în `.env` și ajustați variabilele după nevoie:
 
 ```
 VITE_AUTH_API_URL=https://localhost:8001
