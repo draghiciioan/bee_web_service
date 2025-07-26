@@ -4,6 +4,9 @@ import { PublicLayout } from "@/app/layouts/PublicLayout";
 import { DashboardLayout } from "@/app/layouts/DashboardLayout";
 import Home from "@/pages/Home";
 import Login from "@/pages/Login";
+import VerifyEmail from "@/pages/VerifyEmail";
+import RequestResetPassword from "@/pages/RequestResetPassword";
+import ResetPassword from "@/pages/ResetPassword";
 import DashboardHome from "@/pages/DashboardHome";
 import RegisterClient from "@/pages/register/RegisterClient";
 import RegisterPartner from "@/pages/register/RegisterPartner";
@@ -21,7 +24,14 @@ export const registerRoutes: RouteObject[] = [
 export const routes: RouteObject[] = [
   {
     element: <PublicLayout />,
-    children: [{ path: "/", element: <Home /> }, { path: "/login", element: <Login /> }, ...registerRoutes],
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "/login", element: <Login /> },
+      { path: "/verify-email", element: <VerifyEmail /> },
+      { path: "/password/reset", element: <RequestResetPassword /> },
+      { path: "/password/reset/confirm", element: <ResetPassword /> },
+      ...registerRoutes,
+    ],
   },
   {
     path: "/dashboard",
