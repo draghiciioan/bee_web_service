@@ -113,8 +113,12 @@ Pentru a contribui la acest proiect:
 
 1. Creați un branch nou pentru funcționalitatea dorită
 2. Implementați modificările respectând standardele de cod
-3. Testați modificările local
-4. Creați un pull request către branch-ul principal
+3. Rulați `npm install` pentru a activa scripturile Husky
+4. Orice commit va porni automat `npm run lint` și `npm test` prin hook-ul *pre-commit*
+5. Testați modificările local
+6. Creați un pull request către branch-ul principal
+
+> **Info**: Workflow-ul GitHub Actions rulează aceleași comenzi la fiecare pull request.
 
 ## Licență
 
