@@ -8,10 +8,12 @@ import VerifyEmail from "@/pages/VerifyEmail";
 import RequestResetPassword from "@/pages/RequestResetPassword";
 import ResetPassword from "@/pages/ResetPassword";
 import DashboardHome from "@/pages/DashboardHome";
-import RegisterClient from "@/pages/register/RegisterClient";
-import RegisterPartner from "@/pages/register/RegisterPartner";
-import RegisterCollaborator from "@/pages/register/RegisterCollaborator";
-import RegisterCourier from "@/pages/register/RegisterCourier";
+import {
+  RegisterClient,
+  RegisterPartner,
+  RegisterCollaborator,
+  RegisterCourier,
+} from "@/pages/register";
 
 export const registerRoutes: RouteObject[] = [
   { path: "/register/client", element: <RegisterClient /> },
