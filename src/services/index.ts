@@ -1,8 +1,4 @@
-// Export API client
-import apiClient, { authApi, customersApi } from './apiClient';
+// Punct unic de export pentru serviciile HTTP
+import apiClient from "./apiClient";
 
-export {
-  apiClient as default,
-  authApi,
-  customersApi
-};
+export default apiClient;
