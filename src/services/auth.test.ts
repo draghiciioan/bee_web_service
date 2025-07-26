@@ -15,6 +15,6 @@ describe("registerUser", () => {
     };
     await registerUser(data);
 
-    expect(postSpy).toHaveBeenCalledWith("/register", data);
+    expect(postSpy).toHaveBeenCalledWith("/v1/auth/register", data);
   });
 });
