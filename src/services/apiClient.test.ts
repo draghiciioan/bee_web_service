@@ -23,7 +23,7 @@ describe("apiClient interceptors", () => {
 
     await apiClient.get("/test");
 
-    expect(mock.history.get[0].headers.Authorization).toBe("Bearer token");
+    expect(mock.history.get[0]!.headers?.Authorization).toBe("Bearer token");
   });
 
   it("reîmprospătează tokenul și retrimite cererea o dată la 401", async () => {
@@ -41,7 +41,7 @@ describe("apiClient interceptors", () => {
     expect(refresh).toHaveBeenCalledOnce();
     expect(response.data).toEqual({ ok: true });
     expect(mock.history.get.length).toBe(2);
-    expect(mock.history.get[1].headers.Authorization).toBe("Bearer newToken");
+    expect(mock.history.get[1]!.headers?.Authorization).toBe("Bearer newToken");
   });
 
   it("propagă erori non-401", async () => {
