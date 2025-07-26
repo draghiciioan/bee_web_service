@@ -1,11 +1,19 @@
 import axios from "axios";
 
 // Functie folosită pentru a obține tokenul curent
+// Functie folosită pentru a obține tokenul curent
 let accessTokenGetter: (() => string | null) | null = null;
+// Funcție folosită pentru a reîmprospăta tokenul
+let refreshTokenHandler: (() => Promise<void>) | null = null;
 
 // Permite setarea funcției din exterior (AuthContext)
 export const setAccessTokenGetter = (getter: () => string | null) => {
   accessTokenGetter = getter;
+};
+
+// Permite setarea funcției de refresh din exterior (AuthContext)
+export const setRefreshTokenHandler = (handler: () => Promise<void>) => {
+  refreshTokenHandler = handler;
 };
 
 // Adresa de bază pentru API-ul de autentificare
@@ -34,10 +42,36 @@ apiClient.interceptors.request.use(
 // Adaugă interceptor pentru răspuns ✅
 apiClient.interceptors.response.use(
   (response) => response,
-  (error) => {
-    // TODO: tratează erorile global aici
+  async (error) => {
+    const originalRequest = error.config;
+    const status = error.response?.status;
+
+    // În caz de 401 încearcă reîmprospătarea tokenului o singură dată
+    if (status === 401 && !originalRequest._retry && refreshTokenHandler) {
+      originalRequest._retry = true;
+      try {
+        await refreshTokenHandler();
+        if (accessTokenGetter) {
+          const newToken = accessTokenGetter();
+          if (newToken) {
+            originalRequest.headers.Authorization = `Bearer ${newToken}`;
+          }
+        }
+        return apiClient(originalRequest);
+      } catch (refreshError) {
+        console.error("Eroare la reîmprospătarea tokenului:", refreshError);
+        return Promise.reject(refreshError);
+      }
+    }
+
+    console.error("Eroare API", {
+      url: originalRequest?.url,
+      method: originalRequest?.method,
+      status,
+      data: error.response?.data,
+    });
     return Promise.reject(error);
-  }
+  },
 );
 
 export default apiClient;

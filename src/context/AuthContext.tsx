@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, useCallback } from "react";
 import {
   loginUser,
   logout as logoutService,
@@ -8,7 +8,10 @@ import {
   type User,
   type JwtPair,
 } from "@/services/auth";
-import { setAccessTokenGetter } from "@/services/apiClient";
+import {
+  setAccessTokenGetter,
+  setRefreshTokenHandler,
+} from "@/services/apiClient";
 
 interface AuthContextValue {
   user: User | null;
@@ -62,15 +65,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     localStorage.removeItem("refreshToken");
   };
 
-  const refresh = async () => {
+  const refresh = useCallback(async () => {
     if (!refreshTokenValue) return;
     const tokens = await refreshToken({ refresh: refreshTokenValue });
     saveTokens(tokens);
-  };
+  }, [refreshTokenValue]);
 
   useEffect(() => {
     setAccessTokenGetter(() => accessToken);
-  }, [accessToken]);
+    setRefreshTokenHandler(refresh);
+  }, [accessToken, refreshTokenValue, refresh]);
 
   const value: AuthContextValue = {
     user,
