@@ -72,7 +72,7 @@ describe("requestPasswordReset", () => {
     const data = { email: "test@bee.ro" };
     await requestPasswordReset(data);
 
-    expect(postSpy).toHaveBeenCalledWith("/v1/auth/password/reset", data);
+    expect(postSpy).toHaveBeenCalledWith("/v1/auth/request-reset", data);
   });
 });
 
@@ -83,7 +83,7 @@ describe("resetPassword", () => {
     const data = { token: "abc", password: "nouaParola" };
     await resetPassword(data);
 
-    expect(postSpy).toHaveBeenCalledWith("/v1/auth/password/reset/confirm", data);
+    expect(postSpy).toHaveBeenCalledWith("/v1/auth/reset-password", data);
   });
 });
 
@@ -104,7 +104,7 @@ describe("verify2FA", () => {
     const data = { code: "123456" };
     await verify2FA(data);
 
-    expect(postSpy).toHaveBeenCalledWith("/v1/auth/2fa/verify", data);
+    expect(postSpy).toHaveBeenCalledWith("/v1/auth/verify-2fa", data);
   });
 });
 
@@ -115,7 +115,7 @@ describe("setup2FA", () => {
     const data = { email: "test@bee.ro" };
     await setup2FA(data);
 
-    expect(postSpy).toHaveBeenCalledWith("/v1/auth/2fa/setup", data);
+    expect(postSpy).toHaveBeenCalledWith("/v1/auth/setup-2fa", data);
   });
 });
 
@@ -125,7 +125,9 @@ describe("socialLogin", () => {
 
     await socialLogin("google");
 
-    expect(getSpy).toHaveBeenCalledWith("/v1/auth/google");
+    expect(getSpy).toHaveBeenCalledWith("/v1/auth/social/login", {
+      params: { provider: "google" },
+    });
   });
 });
 
@@ -136,7 +138,9 @@ describe("socialCallback", () => {
     const query = { code: "abc" };
     await socialCallback("google", query);
 
-    expect(getSpy).toHaveBeenCalledWith("/v1/auth/google/callback", { params: query });
+    expect(getSpy).toHaveBeenCalledWith("/v1/auth/social/callback", {
+      params: { provider: "google", ...query },
+    });
   });
 });
 
@@ -156,6 +160,6 @@ describe("validateToken", () => {
 
     await validateToken("abc");
 
-    expect(postSpy).toHaveBeenCalledWith("/v1/auth/validate-token", { token: "abc" });
+    expect(postSpy).toHaveBeenCalledWith("/v1/auth/validate", { token: "abc" });
   });
 });

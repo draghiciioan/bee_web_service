@@ -71,7 +71,7 @@ export const requestPasswordReset = async (
   data: PasswordResetRequest,
 ): Promise<void> => {
   // Solicită resetarea parolei
-  await apiClient.post("/v1/auth/password/reset", data);
+  await apiClient.post("/v1/auth/request-reset", data);
 };
 
 export interface ResetPasswordData {
@@ -83,7 +83,7 @@ export const resetPassword = async (
   data: ResetPasswordData,
 ): Promise<void> => {
   // Trimite parola nouă împreună cu tokenul primit pe email
-  await apiClient.post("/v1/auth/password/reset/confirm", data);
+  await apiClient.post("/v1/auth/reset-password", data);
 };
 
 export const verifyEmail = async (token: string): Promise<void> => {
@@ -99,7 +99,7 @@ export const verify2FA = async (
   data: TwoFactorVerify,
 ): Promise<void> => {
   // Verifică codul 2FA introdus de utilizator
-  await apiClient.post("/v1/auth/2fa/verify", data);
+  await apiClient.post("/v1/auth/verify-2fa", data);
 };
 
 export interface TwoFactorSetup {
@@ -116,7 +116,7 @@ export const setup2FA = async (
 ): Promise<TwoFactorSetupResponse> => {
   // Inițializează configurarea 2FA pentru utilizator
   const response = await apiClient.post<TwoFactorSetupResponse>(
-    "/v1/auth/2fa/setup",
+    "/v1/auth/setup-2fa",
     data,
   );
   return response.data;
@@ -126,7 +126,10 @@ export const socialLogin = async (
   provider: string,
 ): Promise<{ url: string }> => {
   // Obține URL-ul de redirectare către providerul social
-  const response = await apiClient.get<{ url: string }>(`/v1/auth/${provider}`);
+  const response = await apiClient.get<{ url: string }>(
+    "/v1/auth/social/login",
+    { params: { provider } },
+  );
   return response.data;
 };
 
@@ -136,8 +139,8 @@ export const socialCallback = async (
 ): Promise<LoginResponse> => {
   // Procesează răspunsul providerului social
   const response = await apiClient.get<LoginResponse>(
-    `/v1/auth/${provider}/callback`,
-    { params: query },
+    "/v1/auth/social/callback",
+    { params: { provider, ...query } },
   );
   return response.data;
 };
@@ -150,5 +153,5 @@ export const currentUser = async (): Promise<User> => {
 
 export const validateToken = async (token: string): Promise<void> => {
   // Verifică validitatea tokenului pe server
-  await apiClient.post("/v1/auth/validate-token", { token });
+  await apiClient.post("/v1/auth/validate", { token });
 };
