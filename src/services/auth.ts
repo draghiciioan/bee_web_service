@@ -12,5 +12,5 @@ export const registerUser = async (
   data: RegisterData,
 ): Promise<void> => {
   // Trimite datele de înregistrare către microserviciul de autentificare
-  await apiClient.post("/register", data);
+  await apiClient.post("/v1/auth/register", data);
 };
