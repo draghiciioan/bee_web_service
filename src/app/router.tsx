@@ -5,15 +5,23 @@ import { DashboardLayout } from "@/app/layouts/DashboardLayout";
 import Home from "@/pages/Home";
 import Login from "@/pages/Login";
 import DashboardHome from "@/pages/DashboardHome";
+import RegisterClient from "@/pages/register/RegisterClient";
+import RegisterPartner from "@/pages/register/RegisterPartner";
+import RegisterCollaborator from "@/pages/register/RegisterCollaborator";
+import RegisterCourier from "@/pages/register/RegisterCourier";
+
+export const registerRoutes: RouteObject[] = [
+  { path: "/register/client", element: <RegisterClient /> },
+  { path: "/register/partner", element: <RegisterPartner /> },
+  { path: "/register/collaborator", element: <RegisterCollaborator /> },
+  { path: "/register/courier", element: <RegisterCourier /> },
+];
 
 // Rutele de bază vizibile imediat
 export const routes: RouteObject[] = [
   {
     element: <PublicLayout />,
-    children: [
-      { path: "/", element: <Home /> },
-      { path: "/login", element: <Login /> },
-    ],
+    children: [{ path: "/", element: <Home /> }, { path: "/login", element: <Login /> }, ...registerRoutes],
   },
   {
     path: "/dashboard",
@@ -28,6 +36,6 @@ export const addRoutes = (newRoutes: RouteObject[]): void => {
 };
 
 // Componență care generează routerul aplicației
-export const AppRouter = (): JSX.Element | null => {
+export const AppRouter = () => {
   return useRoutes(routes);
 };
