@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - Planificare pentru implementarea funcțiilor de înregistrare, autentificare și resetare parolă
 - Integrări viitoare cu notificări prin email și autentificare multi-factor
+- Export `registerRoutes` în router și test pentru verificarea rutelor
 
 ## [0.1.0] - 2025-08-30
 ### Added
