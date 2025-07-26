@@ -1,7 +1,6 @@
 import axios from "axios";
 
 // Functie folosită pentru a obține tokenul curent
-// Functie folosită pentru a obține tokenul curent
 let accessTokenGetter: (() => string | null) | null = null;
 // Funcție folosită pentru a reîmprospăta tokenul
 let refreshTokenHandler: (() => Promise<void>) | null = null;
