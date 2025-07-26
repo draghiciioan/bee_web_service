@@ -1,4 +1,5 @@
 import RegisterForm from "@/shared/components/forms/RegisterForm";
+import { ROLE_COLLABORATOR } from "@/shared/constants/roles";
 
 export default function RegisterCollaborator() {
   return (
@@ -6,7 +7,8 @@ export default function RegisterCollaborator() {
       <h2 className="mb-6 text-center text-2xl font-bold text-green-400">
         Înregistrare Colaborator
       </h2>
-      <RegisterForm role="collaborator" />
+      {/* Trimite rolul corespunzător către formular */}
+      <RegisterForm role={ROLE_COLLABORATOR} />
     </div>
   );
 }
