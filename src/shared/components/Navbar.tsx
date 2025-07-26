@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { UserCircle, LogOut, Settings, UserPlus, Lock } from "lucide-react";
 import beeLogo from "../../assets/logo-bee.webp"; // Poți schimba cu logo-ul tău
 
@@ -116,22 +117,38 @@ const Navbar = () => {
               <div className="text-xs font-bold text-yellow-600/80 px-3 py-1 uppercase tracking-widest flex items-center gap-2">
                 <UserPlus size={16} className="text-yellow-400" /> Alege un rol:
               </div>
-              <div className="flex items-center gap-2 hover:bg-yellow-100/60 hover:scale-105 transition-all px-3 py-2 rounded-xl cursor-pointer font-semibold text-yellow-700 text-base shadow-sm group">
+              <Link
+                to="/register/client"
+                onClick={() => setSignupOpen(false)}
+                className="flex items-center gap-2 hover:bg-yellow-100/60 hover:scale-105 transition-all px-3 py-2 rounded-xl cursor-pointer font-semibold text-yellow-700 text-base shadow-sm group"
+              >
                 <span className="text-lg">👤</span> Client
                 <span className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-xs text-yellow-500">Cont personal</span>
-              </div>
-              <div className="flex items-center gap-2 hover:bg-yellow-100/60 hover:scale-105 transition-all px-3 py-2 rounded-xl cursor-pointer font-semibold text-yellow-700 text-base shadow-sm group">
+              </Link>
+              <Link
+                to="/register/partner"
+                onClick={() => setSignupOpen(false)}
+                className="flex items-center gap-2 hover:bg-yellow-100/60 hover:scale-105 transition-all px-3 py-2 rounded-xl cursor-pointer font-semibold text-yellow-700 text-base shadow-sm group"
+              >
                 <span className="text-lg">🤝</span> Partener
                 <span className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-xs text-yellow-500">Business</span>
-              </div>
-              <div className="flex items-center gap-2 hover:bg-yellow-100/60 hover:scale-105 transition-all px-3 py-2 rounded-xl cursor-pointer font-semibold text-yellow-700 text-base shadow-sm group">
+              </Link>
+              <Link
+                to="/register/collaborator"
+                onClick={() => setSignupOpen(false)}
+                className="flex items-center gap-2 hover:bg-yellow-100/60 hover:scale-105 transition-all px-3 py-2 rounded-xl cursor-pointer font-semibold text-yellow-700 text-base shadow-sm group"
+              >
                 <span className="text-lg">🧑‍💼</span> Colaborator
                 <span className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-xs text-yellow-500">Freelancer</span>
-              </div>
-              <div className="flex items-center gap-2 hover:bg-yellow-100/60 hover:scale-105 transition-all px-3 py-2 rounded-xl cursor-pointer font-semibold text-yellow-700 text-base shadow-sm group">
+              </Link>
+              <Link
+                to="/register/courier"
+                onClick={() => setSignupOpen(false)}
+                className="flex items-center gap-2 hover:bg-yellow-100/60 hover:scale-105 transition-all px-3 py-2 rounded-xl cursor-pointer font-semibold text-yellow-700 text-base shadow-sm group"
+              >
                 <span className="text-lg">🚚</span> Curier
                 <span className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-xs text-yellow-500">Livrări</span>
-              </div>
+              </Link>
             </div>
           )}
         </div>
