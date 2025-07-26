@@ -36,7 +36,6 @@ export default function RegisterForm({ role }: RegisterFormProps) {
         <Label htmlFor="email">Email</Label>
         <TextInput
           id="email"
-          name="email"
           type="email"
           placeholder="name@beeconect.com"
           {...register("email")}
@@ -52,7 +51,6 @@ export default function RegisterForm({ role }: RegisterFormProps) {
         <Label htmlFor="full_name">Nume complet</Label>
         <TextInput
           id="full_name"
-          name="full_name"
           type="text"
           placeholder="Ion Popescu"
           {...register("full_name")}
@@ -68,7 +66,6 @@ export default function RegisterForm({ role }: RegisterFormProps) {
         <Label htmlFor="phone_number">Telefon</Label>
         <TextInput
           id="phone_number"
-          name="phone_number"
           type="tel"
           placeholder="07********"
           {...register("phone_number")}
@@ -88,7 +85,6 @@ export default function RegisterForm({ role }: RegisterFormProps) {
         <Label htmlFor="password">Parolă</Label>
         <TextInput
           id="password"
-          name="password"
           type="password"
           {...register("password")}
         />
