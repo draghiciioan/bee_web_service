@@ -43,9 +43,11 @@ yarn install
 Creați un fișier `.env` în directorul rădăcină cu următoarele variabile:
 
 ```
-VITE_AUTH_API_URL=http://localhost:8001
-VITE_CUSTOMERS_API_URL=http://localhost:8016
+VITE_AUTH_API_URL=https://localhost:8001
+VITE_CUSTOMERS_API_URL=https://localhost:8016
 ```
+
+> **Notă**: Toate apelurile API folosesc HTTPS pentru securitate, chiar și în mediul de dezvoltare local.
 
 ### Rulare în Modul Dezvoltare
 
