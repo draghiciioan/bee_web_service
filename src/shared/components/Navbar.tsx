@@ -49,7 +49,7 @@ const Navbar = () => {
           <li className="hover:text-cyan-400 hover:scale-110 transition-all duration-150 cursor-pointer border-b-2 border-transparent hover:border-cyan-400">Contact</li>
         </ul>
         {/* Separator vizual */}
-        <div class="h-8 w-0.5 bg-cyan-400/20 mx-2 hidden md:block"></div>
+        <div className="h-8 w-0.5 bg-cyan-400/20 mx-2 hidden md:block"></div>
         <LoginDropdown />
         <SignupDropdown />
         <ThemeDropdown />
