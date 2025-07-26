@@ -21,7 +21,10 @@ describe("useResetPassword", () => {
     });
 
     await waitFor(() => {
-      expect(postSpy).toHaveBeenCalledWith("/v1/auth/password/reset/confirm", { token: "abc", password: "noua" });
+      expect(postSpy).toHaveBeenCalledWith("/v1/auth/reset-password", {
+        token: "abc",
+        password: "noua",
+      });
     });
   });
 });

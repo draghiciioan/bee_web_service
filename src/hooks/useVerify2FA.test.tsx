@@ -21,7 +21,9 @@ describe("useVerify2FA", () => {
     });
 
     await waitFor(() => {
-      expect(postSpy).toHaveBeenCalledWith("/v1/auth/2fa/verify", { code: "123" });
+      expect(postSpy).toHaveBeenCalledWith("/v1/auth/verify-2fa", {
+        code: "123",
+      });
     });
   });
 });

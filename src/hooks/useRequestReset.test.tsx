@@ -21,7 +21,9 @@ describe("useRequestReset", () => {
     });
 
     await waitFor(() => {
-      expect(postSpy).toHaveBeenCalledWith("/v1/auth/password/reset", { email: "test@bee.ro" });
+      expect(postSpy).toHaveBeenCalledWith("/v1/auth/request-reset", {
+        email: "test@bee.ro",
+      });
     });
   });
 });
