@@ -1,37 +1,37 @@
-import { useState } from "react";
 import { Button, Label, TextInput } from "flowbite-react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useRegister } from "@/hooks/useRegister";
+import {
+  registerSchema,
+  type RegisterFormValues,
+} from "@/shared/validation/registerSchema";
 
 interface RegisterFormProps {
   role: string;
 }
 
 export default function RegisterForm({ role }: RegisterFormProps) {
-  const [formData, setFormData] = useState({
-    email: "",
-    full_name: "",
-    phone_number: "",
-    password: "",
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<RegisterFormValues>({
+    resolver: yupResolver(registerSchema),
   });
+
   const { mutate, isPending, error } = useRegister();
-  const validationErrors = (error && error.errors) || {};
+  const serverErrors = (error && error.errors) || {};
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-    mutate({ ...formData, role });
+  const onSubmit = (data: RegisterFormValues): void => {
+    mutate({ ...data, role });
   };
 
   return (
     <form
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit(onSubmit)}
       className="mx-auto flex max-w-md flex-col gap-4"
     >
-      <input type="hidden" name="role" value={role} />
       <div>
         <Label htmlFor="email">Email</Label>
         <TextInput
@@ -39,12 +39,13 @@ export default function RegisterForm({ role }: RegisterFormProps) {
           name="email"
           type="email"
           placeholder="name@beeconect.com"
-          required
-          value={formData.email}
-          onChange={handleChange}
+          {...register("email")}
         />
-        {validationErrors.email && (
-          <p className="text-sm text-red-500">{validationErrors.email[0]}</p>
+        {errors.email && (
+          <p className="text-sm text-red-500">{errors.email.message}</p>
+        )}
+        {serverErrors.email && (
+          <p className="text-sm text-red-500">{serverErrors.email[0]}</p>
         )}
       </div>
       <div>
@@ -54,12 +55,13 @@ export default function RegisterForm({ role }: RegisterFormProps) {
           name="full_name"
           type="text"
           placeholder="Ion Popescu"
-          required
-          value={formData.full_name}
-          onChange={handleChange}
+          {...register("full_name")}
         />
-        {validationErrors.full_name && (
-          <p className="text-sm text-red-500">{validationErrors.full_name[0]}</p>
+        {errors.full_name && (
+          <p className="text-sm text-red-500">{errors.full_name.message}</p>
+        )}
+        {serverErrors.full_name && (
+          <p className="text-sm text-red-500">{serverErrors.full_name[0]}</p>
         )}
       </div>
       <div>
@@ -69,13 +71,16 @@ export default function RegisterForm({ role }: RegisterFormProps) {
           name="phone_number"
           type="tel"
           placeholder="07********"
-          required
-          value={formData.phone_number}
-          onChange={handleChange}
+          {...register("phone_number")}
         />
-        {validationErrors.phone_number && (
+        {errors.phone_number && (
           <p className="text-sm text-red-500">
-            {validationErrors.phone_number[0]}
+            {errors.phone_number.message}
+          </p>
+        )}
+        {serverErrors.phone_number && (
+          <p className="text-sm text-red-500">
+            {serverErrors.phone_number[0]}
           </p>
         )}
       </div>
@@ -85,12 +90,13 @@ export default function RegisterForm({ role }: RegisterFormProps) {
           id="password"
           name="password"
           type="password"
-          required
-          value={formData.password}
-          onChange={handleChange}
+          {...register("password")}
         />
-        {validationErrors.password && (
-          <p className="text-sm text-red-500">{validationErrors.password[0]}</p>
+        {errors.password && (
+          <p className="text-sm text-red-500">{errors.password.message}</p>
+        )}
+        {serverErrors.password && (
+          <p className="text-sm text-red-500">{serverErrors.password[0]}</p>
         )}
       </div>
       {error && !error.errors && (

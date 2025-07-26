@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import RegisterForm from "./RegisterForm";
 import { vi, describe, it, expect } from "vitest";
 
@@ -8,7 +8,7 @@ vi.mock("@/hooks/useRegister", () => ({
 }));
 
 describe("RegisterForm", () => {
-  it("trimite datele completate", () => {
+  it("trimite datele completate", async () => {
     render(<RegisterForm role="client" />);
 
     fireEvent.change(screen.getByLabelText(/Email/), {
@@ -21,17 +21,19 @@ describe("RegisterForm", () => {
       target: { value: "0712345678" }
     });
     fireEvent.change(screen.getByLabelText(/Parolă/), {
-      target: { value: "parola" }
+      target: { value: "parola123" }
     });
 
     fireEvent.click(screen.getByRole("button", { name: /Creează cont/i }));
 
-    expect(mutate).toHaveBeenCalledWith({
-      email: "test@bee.ro",
-      full_name: "Ion Pop",
-      phone_number: "0712345678",
-      password: "parola",
-      role: "client"
+    await waitFor(() => {
+      expect(mutate).toHaveBeenCalledWith({
+        email: "test@bee.ro",
+        full_name: "Ion Pop",
+        phone_number: "0712345678",
+        password: "parola123",
+        role: "client"
+      });
     });
   });
 });
