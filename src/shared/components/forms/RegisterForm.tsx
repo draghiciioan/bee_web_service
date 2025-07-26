@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button, Label, TextInput } from "flowbite-react";
+import { useRegister } from "@/hooks/useRegister";
 
 interface RegisterFormProps {
   role: string;
@@ -12,6 +13,8 @@ export default function RegisterForm({ role }: RegisterFormProps) {
     phone_number: "",
     password: "",
   });
+  const { mutate, isPending, error } = useRegister();
+  const validationErrors = (error && error.errors) || {};
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = e.target;
@@ -20,8 +23,7 @@ export default function RegisterForm({ role }: RegisterFormProps) {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    // TODO: trimite datele către API
-    console.log({ ...formData, role });
+    mutate({ ...formData, role });
   };
 
   return (
@@ -41,6 +43,9 @@ export default function RegisterForm({ role }: RegisterFormProps) {
           value={formData.email}
           onChange={handleChange}
         />
+        {validationErrors.email && (
+          <p className="text-sm text-red-500">{validationErrors.email[0]}</p>
+        )}
       </div>
       <div>
         <Label htmlFor="full_name">Nume complet</Label>
@@ -53,6 +58,9 @@ export default function RegisterForm({ role }: RegisterFormProps) {
           value={formData.full_name}
           onChange={handleChange}
         />
+        {validationErrors.full_name && (
+          <p className="text-sm text-red-500">{validationErrors.full_name[0]}</p>
+        )}
       </div>
       <div>
         <Label htmlFor="phone_number">Telefon</Label>
@@ -65,6 +73,11 @@ export default function RegisterForm({ role }: RegisterFormProps) {
           value={formData.phone_number}
           onChange={handleChange}
         />
+        {validationErrors.phone_number && (
+          <p className="text-sm text-red-500">
+            {validationErrors.phone_number[0]}
+          </p>
+        )}
       </div>
       <div>
         <Label htmlFor="password">Parolă</Label>
@@ -76,8 +89,16 @@ export default function RegisterForm({ role }: RegisterFormProps) {
           value={formData.password}
           onChange={handleChange}
         />
+        {validationErrors.password && (
+          <p className="text-sm text-red-500">{validationErrors.password[0]}</p>
+        )}
       </div>
-      <Button type="submit" color="cyan">Creează cont</Button>
+      {error && !error.errors && (
+        <p className="text-sm text-red-500">{error.message}</p>
+      )}
+      <Button type="submit" color="cyan" disabled={isPending}>
+        {isPending ? "Se trimit..." : "Creează cont"}
+      </Button>
     </form>
   );
 }
