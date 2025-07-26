@@ -116,6 +116,12 @@ să poată atașa tokenul curent și să reîncerce cererile după o eroare 401.
 ## Funcționalități Principale
 
 - **Autentificare**: Login, înregistrare, recuperare parolă
+  - Formularele dedicate fiecărui rol se găsesc la următoarele rute:
+    - `/register/client`
+    - `/register/partner`
+    - `/register/collaborator`
+    - `/register/courier`
+  - Toate trimit datele către `POST /v1/auth/register` folosind hook-ul `useRegister`.
 - **Gestionare Clienți**: Vizualizare, adăugare, editare și ștergere clienți
 - **Profil Utilizator**: Gestionarea informațiilor personale și preferințelor
 
