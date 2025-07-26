@@ -3,7 +3,7 @@ import apiClient from "./apiClient";
 export interface RegisterData {
   email: string;
   full_name: string;
-  phone_number: string;
+  phone_number?: string | null;
   password: string;
   role: string;
 }
