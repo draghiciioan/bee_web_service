@@ -1,5 +1,5 @@
 import { Button, Label, TextInput } from "flowbite-react";
-import { useForm } from "react-hook-form";
+import { useForm, type SubmitHandler, type Resolver } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRegister } from "@/hooks/useRegister";
 import {
@@ -17,13 +17,13 @@ export default function RegisterForm({ role }: RegisterFormProps) {
     handleSubmit,
     formState: { errors },
   } = useForm<RegisterFormValues>({
-    resolver: yupResolver(registerSchema),
+    resolver: yupResolver(registerSchema) as Resolver<RegisterFormValues>,
   });
 
   const { mutate, isPending, error } = useRegister();
   const serverErrors = (error && error.errors) || {};
 
-  const onSubmit = (data: RegisterFormValues): void => {
+  const onSubmit: SubmitHandler<RegisterFormValues> = (data) => {
     mutate({ ...data, role });
   };
 

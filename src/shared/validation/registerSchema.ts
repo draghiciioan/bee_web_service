@@ -17,4 +17,8 @@ export const registerSchema = yup.object({
     .required("Parola este obligatorie"),
 });
 
-export type RegisterFormValues = yup.InferType<typeof registerSchema>;
+type SchemaShape = yup.InferType<typeof registerSchema>;
+
+export interface RegisterFormValues extends Omit<SchemaShape, "phone_number"> {
+  phone_number?: string | null;
+}
