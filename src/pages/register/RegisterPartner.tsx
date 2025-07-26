@@ -6,7 +6,7 @@ export default function RegisterPartner() {
       <h2 className="mb-6 text-center text-2xl font-bold text-yellow-400">
         Înregistrare Partener
       </h2>
-      <RegisterForm role="partner" />
+      <RegisterForm role="admin_business" />
     </div>
   );
 }
