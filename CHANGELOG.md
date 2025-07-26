@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Planificare pentru implementarea funcțiilor de înregistrare, autentificare și resetare parolă
 - Integrări viitoare cu notificări prin email și autentificare multi-factor
 - Export `registerRoutes` în router și test pentru verificarea rutelor
+- Dropdownul de înregistrare folosește acum link-uri `react-router-dom` pentru fiecare rol și închide meniul la click
 
 ## [0.1.0] - 2025-08-30
 ### Added

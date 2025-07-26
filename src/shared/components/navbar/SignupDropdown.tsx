@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { UserPlus } from "lucide-react";
 import DropdownContainer from "./DropdownContainer";
-import MenuItem from "./MenuItem";
 
 const SignupDropdown = () => {
   const [open, setOpen] = useState(false);
@@ -32,38 +32,50 @@ const SignupDropdown = () => {
           <div className="text-xs font-bold text-yellow-600/80 px-3 py-1 uppercase tracking-widest flex items-center gap-2">
             <UserPlus size={16} className="text-yellow-400" /> Alege un rol:
           </div>
-          <MenuItem
+          <Link
             to="/register/client"
             onClick={() => setOpen(false)}
-            icon={<span className="text-lg">👤</span>}
-            label="Client"
-            subLabel="Cont personal"
-            className="text-yellow-700 hover:bg-yellow-100/60"
-          />
-          <MenuItem
+            className="flex items-center gap-2 hover:scale-105 transition-all px-3 py-2 rounded-xl cursor-pointer font-semibold text-base shadow-sm group text-yellow-700 hover:bg-yellow-100/60"
+          >
+            <span className="text-lg">👤</span>
+            Client
+            <span className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-xs">
+              Cont personal
+            </span>
+          </Link>
+          <Link
             to="/register/partner"
             onClick={() => setOpen(false)}
-            icon={<span className="text-lg">🤝</span>}
-            label="Partener"
-            subLabel="Business"
-            className="text-yellow-700 hover:bg-yellow-100/60"
-          />
-          <MenuItem
+            className="flex items-center gap-2 hover:scale-105 transition-all px-3 py-2 rounded-xl cursor-pointer font-semibold text-base shadow-sm group text-yellow-700 hover:bg-yellow-100/60"
+          >
+            <span className="text-lg">🤝</span>
+            Partener
+            <span className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-xs">
+              Business
+            </span>
+          </Link>
+          <Link
             to="/register/collaborator"
             onClick={() => setOpen(false)}
-            icon={<span className="text-lg">🧑‍💼</span>}
-            label="Colaborator"
-            subLabel="Freelancer"
-            className="text-yellow-700 hover:bg-yellow-100/60"
-          />
-          <MenuItem
+            className="flex items-center gap-2 hover:scale-105 transition-all px-3 py-2 rounded-xl cursor-pointer font-semibold text-base shadow-sm group text-yellow-700 hover:bg-yellow-100/60"
+          >
+            <span className="text-lg">🧑‍💼</span>
+            Colaborator
+            <span className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-xs">
+              Freelancer
+            </span>
+          </Link>
+          <Link
             to="/register/courier"
             onClick={() => setOpen(false)}
-            icon={<span className="text-lg">🚚</span>}
-            label="Curier"
-            subLabel="Livrări"
-            className="text-yellow-700 hover:bg-yellow-100/60"
-          />
+            className="flex items-center gap-2 hover:scale-105 transition-all px-3 py-2 rounded-xl cursor-pointer font-semibold text-base shadow-sm group text-yellow-700 hover:bg-yellow-100/60"
+          >
+            <span className="text-lg">🚚</span>
+            Curier
+            <span className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-xs">
+              Livrări
+            </span>
+          </Link>
         </DropdownContainer>
       )}
     </div>
