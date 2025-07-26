@@ -12,19 +12,21 @@ interface RegisterError {
 }
 
 export const useRegister = () => {
-  return useMutation<void, RegisterError, RegisterData>(async (data) => {
-    try {
-      await registerUser(data);
-    } catch (err) {
-      const error = err as AxiosError<{ errors?: ValidationErrors }>;
-      if (axios.isAxiosError(error) && error.response?.status === 422) {
-        // Erorile de validare venite de la server
-        throw {
-          message: "Date invalide",
-          errors: (error.response.data as { errors?: ValidationErrors }).errors,
-        };
+  return useMutation<void, RegisterError, RegisterData>({
+    mutationFn: async (data: RegisterData) => {
+      try {
+        await registerUser(data);
+      } catch (err) {
+        const error = err as AxiosError<{ errors?: ValidationErrors }>;
+        if (axios.isAxiosError(error) && error.response?.status === 422) {
+          // Erorile de validare venite de la server
+          throw {
+            message: "Date invalide",
+            errors: (error.response.data as { errors?: ValidationErrors }).errors,
+          };
+        }
+        throw { message: "Eroare la înregistrare" };
       }
-      throw { message: "Eroare la înregistrare" };
-    }
+    },
   });
 };
