@@ -12,7 +12,7 @@ Pentru a asigura funcționarea corectă a serviciului web cu serviciile de auten
      ```
 
      > **Notă**: Toate apelurile API folosesc HTTPS pentru securitate, chiar și în mediul de dezvoltare local.
-   - Aceste variabile sunt utilizate în `src/api.ts` pentru a configura conexiunile către serviciile backend.
+   - Aceste variabile sunt utilizate în `src/services/apiClient.ts` pentru a configura clientul Axios care comunică cu serviciile backend.
 
 2. **Actualizare variabile de mediu în docker-compose.yml**:
    - Au fost actualizate variabilele de mediu pentru serviciul web:

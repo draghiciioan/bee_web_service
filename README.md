@@ -16,7 +16,7 @@ Serviciul Web BeeConect este interfața frontend a platformei BeeConect, oferind
 
 ## Structura Proiectului
 
-- **src/api.ts**: Configurare Axios pentru comunicarea cu serviciile backend
+- **src/services/apiClient.ts**: Configurare Axios pentru comunicarea cu serviciile backend
 - **src/components/**: Componente React reutilizabile
 - **src/context/**: Contexte React pentru gestionarea stării globale
 - **src/hooks/**: Hook-uri personalizate React
@@ -45,6 +45,15 @@ Creați un fișier `.env` în directorul rădăcină cu următoarele variabile:
 ```
 VITE_AUTH_API_URL=https://localhost:8001
 VITE_CUSTOMERS_API_URL=https://localhost:8016
+```
+
+Aceste adrese sunt folosite de fișierul `src/services/apiClient.ts` pentru a crea
+instanța Axios care trimite cereri către microserviciile de autentificare și clienți.
+
+```ts
+import apiClient from "@/services/apiClient";
+
+apiClient.get("/status");
 ```
 
 > **Notă**: Toate apelurile API folosesc HTTPS pentru securitate, chiar și în mediul de dezvoltare local.
